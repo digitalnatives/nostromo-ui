@@ -27,6 +27,10 @@ module DOM
       `#{@el}.blur()`
     end
 
+    def show
+      @style.display = ''
+    end
+
     def previous
       value = `#{@el}.previousElementSibling || false`
       value ? DOM::Element.fromNode(value) : nil

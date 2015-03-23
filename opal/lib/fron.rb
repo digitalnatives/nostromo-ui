@@ -113,10 +113,14 @@ module Fron
           end
         end
 
+        def update!(records)
+          ActiveRecord.diff(@items, records) { |data| create_item(data) }
+          render if respond_to? :render
+          yield if block_given?
+        end
+
         def update(params = {})
           where(params) do |records|
-            ActiveRecord.diff(@items, records) { |data| create_item(data) }
-            render if respond_to? :render
             yield if block_given?
           end
         end
