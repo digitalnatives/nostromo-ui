@@ -1,0 +1,84 @@
+%markdown {
+  box-shadow: 0 0 0 1px rgba($blue, 0), 0 0 0 rgba($blue, 0.2);
+  border-radius: 2px;
+  position: relative;
+  transition: 320ms;
+  cursor: pointer;
+  display: block;
+  height: 200px;
+
+  > a {
+    text-align: center;
+    font-weight: bold;
+    line-height: 18px;
+    font-size: 18px;
+    color: #CCC;
+
+    position: absolute;
+    transition: 320ms;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0;
+    z-index: 3;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  textarea {
+    pointer-events: none;
+    transition: 320ms;
+    background: none;
+    padding: 10px;
+    resize: none;
+    opacity: 0;
+    border: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #CCC;
+    }
+  }
+
+  content {
+    transform: tralate3d(0, 0, 0);
+    transition: 320ms 320ms;
+    overflow: auto;
+    padding: 10px;
+
+    &:empty + textarea {
+      opacity: 1;
+    }
+  }
+
+  &.editing {
+    box-shadow: 0 0 0 1px rgba($blue, 0.05), 0 5px 10px rgba($blue, 0.2);
+
+    a {
+      opacity: 1;
+    }
+
+    content {
+      transition: 320ms;
+      opacity: 0;
+    }
+
+    textarea {
+      transition: 320ms 320ms;
+      pointer-events: auto;
+      opacity: 1;
+    }
+  }
+
+  content, textarea {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+}

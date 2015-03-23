@@ -1,0 +1,67 @@
+auto-complete {
+  position: relative;
+  display: block;
+
+  input {
+    @include focusable;
+
+    padding: 7px 10px;
+    width: 100%;
+    border: 0;
+
+    &::placeholder {
+      font-weight: 600;
+      color: #CCC;
+    }
+  }
+
+  auto-complete-dropdown {
+    box-shadow: 0 0 0 1px rgba($blue, 0.05), 0 10px 10px -5px rgba($blue, 0.2);
+    border-radius: 3px;
+    position: absolute;
+    background: #FFF;
+    margin-top: 5px;
+    z-index: 1;
+    top: 100%;
+    right: 0;
+    left: 0;
+
+    &:empty {
+      display: none;
+    }
+
+    item {
+      display: block;
+      padding: 5px;
+      line-height: 30px;
+      font-weight: 600;
+      cursor: pointer;
+
+      > * {
+        pointer-events: none;
+      }
+
+      &.selected, &:hover {
+        background: $blue;
+        color: #FFF;
+      }
+
+      &:first-child {
+        border-radius: 3px 3px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 3px 3px;
+      }
+
+      member {
+        margin: 0;
+        margin-right: 10px;
+      }
+
+      + item {
+        border-top: 1px solid $light-blue;
+      }
+    }
+  }
+}

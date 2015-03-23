@@ -1,0 +1,13 @@
+require 'vendor/marked'
+require 'vendor/math.uuid'
+
+require 'lib/date'
+require 'lib/component'
+require 'lib/fron'
+require 'lib/kernel'
+require 'lib/render_proc'
+
+<% dir = File.dirname(__FILE__) %>
+<% Dir.glob(dir + '/components/*').select { |f| File.directory? f }.each do |f| %>
+  <%= "require 'components/#{File.basename(f)}/component'" %>
+<% end %>

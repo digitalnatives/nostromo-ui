@@ -1,0 +1,87 @@
+multi-select {
+  color: mix($blue, #999, 40%);
+  display: inline-block;
+  position: relative;
+  width: 200px;
+
+  &:after {
+    border-color: #CCC transparent transparent;
+    border-width: 6px 6px 0;
+    border-style: solid;
+    position: absolute;
+    content: '';
+    right: 12px;
+    top: 12px;
+    height: 0;
+    width: 0;
+  }
+
+  > input {
+    padding-right: 30px !important;
+    font-weight: 600;
+    width: inherit;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:focus {
+      text-overflow: clip;
+      color: inherit;
+    }
+  }
+
+  &.open {
+    multi-select-dropdown {
+      display: block;
+    }
+  }
+
+  multi-select-dropdown {
+    box-shadow: 0 0 0 1px $border-color, 0 10px 10px -5px rgba($blue, 0.2);
+    background: $light-blue;
+    border-radius: 3px;
+    position: absolute;
+    max-height: 300px;
+    margin-top: 4px;
+    overflow: auto;
+    width: inherit;
+    display: none;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+  }
+
+  multi-select-item {
+    cursor: pointer;
+    display: flex;
+
+    &:hover {
+      background: darken($light-blue, 5%);
+    }
+
+    + multi-select-item {
+      border-top: 1px solid $border-color;
+    }
+
+    span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      padding-left: 5px;
+      line-height: 32px;
+      font-weight: 600;
+      flex: 1;
+    }
+  }
+
+  multi-select-check-box {
+    @extend %check-box;
+    margin: 5px;
+
+    input:not(:checked) + label {
+      background: #FFF;
+    }
+  }
+}

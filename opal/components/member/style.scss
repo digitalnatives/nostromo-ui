@@ -1,0 +1,17 @@
+member {
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  margin: 2px;
+
+  img {
+    border-radius: 3px;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  &:hover:after {
+    opacity: 1;
+    transition: 1ms 500ms;
+  }
+}

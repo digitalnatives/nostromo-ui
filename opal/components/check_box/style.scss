@@ -1,0 +1,41 @@
+%check-box {
+  display: inline-block;
+  overflow: hidden;
+  height: 20px;
+  width: 20px;
+
+  input {
+    display: none;
+
+    &:checked + label {
+      background: $green;
+
+      i.fa {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+
+  label {
+    border-radius: 3px;
+    transition: 320ms;
+    background: #EEE;
+    cursor: pointer;
+    height: inherit;
+    width: inherit;
+    margin: 0;
+
+    line-height: 20px;
+    text-align: center;
+
+    i.fa {
+      transform: scale(0.4) rotate(45deg);
+      pointer-events: none;
+      transition: inherit;
+      margin: auto;
+      color: #FFF;
+      opacity: 0;
+    }
+  }
+}
