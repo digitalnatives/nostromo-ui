@@ -65,6 +65,11 @@ chooser {
       display: block;
       padding: 0 7px;
 
+      &.selected {
+        background: $blue;
+        color: #FFF;
+      }
+
       &:first-child {
         border-radius: 3px 3px 0 0;
       }

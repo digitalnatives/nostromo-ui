@@ -1,6 +1,6 @@
 # Basic Select Element
 class Chooser < Fron::Component
-  tag 'chooser[tabindex=-1]'
+  tag 'chooser[tabindex=0]'
 
   component :label,    'chooser-label'
   component :dropdown, 'chooser-dropdown'
@@ -8,6 +8,8 @@ class Chooser < Fron::Component
   on :focus,     :open
   on :blur,      :close
   on :mousedown, :mousedown
+  on :keydown,   :keydown
+  on :keypress,  :keypress
 
   on :click, 'chooser-option', :select
 
@@ -18,6 +20,50 @@ class Chooser < Fron::Component
     select_option event.target
     trigger 'change'
     blur
+  end
+
+  def keydown(event)
+    case event.keyCode
+    when 38
+      select_previous
+    when 40
+      select_next
+    end
+  end
+
+  def select_next
+    select_with :first, :next
+  end
+
+  def select_previous
+    select_with :last, :previous
+  end
+
+  def select_with(tail, method)
+    select_option selected.send(method) || dropdown.children.send(tail)
+    trigger 'change'
+    `#{selected}.el.scrollIntoView()`
+  end
+
+  def selected
+    dropdown.find('.selected') || dropdown.children.first
+  end
+
+  def keypress(event)
+    @search ||= ''
+    clear_timeout @timeout_id
+    @timeout_id = timeout 300 do
+      @search = ''
+    end
+    @search += `String.fromCharCode(#{event.charCode})`
+    dropdown.children.each do |child|
+      if child.text =~ Regexp.new("^#{@search}", 'i')
+        select_option child
+        trigger :change
+        `#{selected}.el.scrollIntoView()`
+        break
+      end
+    end
   end
 
   # Runs when the mouse is down,
@@ -93,6 +139,8 @@ class Chooser < Fron::Component
   private
 
   def select_option(option)
+    selected.removeClass('selected') if selected
+    option.addClass('selected')
     @value = option[:value]
     @label.text = option.text
   end

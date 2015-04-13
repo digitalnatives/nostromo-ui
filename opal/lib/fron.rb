@@ -121,6 +121,7 @@ module Fron
 
         def update(params = {})
           where(params) do |records|
+            update! records
             yield if block_given?
           end
         end
