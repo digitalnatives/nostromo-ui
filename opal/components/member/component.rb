@@ -20,6 +20,7 @@ class Member < User
 
   # Renders the component
   def render
+    return unless @data
     self[:id] = @data[:id]
     self[:title] = @data[:name]
     @picture[:src] = @data[:picture]
