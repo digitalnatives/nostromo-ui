@@ -24,6 +24,8 @@ class Chooser < Fron::Component
 
   def keydown(event)
     case event.keyCode
+    when 13
+      blur
     when 38
       select_previous
     when 40
@@ -41,7 +43,6 @@ class Chooser < Fron::Component
 
   def select_with(tail, method)
     select_option selected.send(method) || dropdown.children.send(tail)
-    trigger 'change'
     `#{selected}.el.scrollIntoView()`
   end
 
@@ -59,7 +60,6 @@ class Chooser < Fron::Component
     dropdown.children.each do |child|
       if child.text =~ Regexp.new("^#{@search}", 'i')
         select_option child
-        trigger :change
         `#{selected}.el.scrollIntoView()`
         break
       end
@@ -87,6 +87,7 @@ class Chooser < Fron::Component
   # Hides the dropdown
   def close
     removeClass 'open'
+    trigger :change
   end
 
   # Returns the value
