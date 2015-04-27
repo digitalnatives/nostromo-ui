@@ -73,7 +73,7 @@ class MarkdownTextarea < Fron::Component
 
   # Renders the value as markdown
   def render
-    @content.html = `filterXSS(marked(#{value.to_s}))`
+    @content.html = `marked(Encoder.htmlEncode(#{value.to_s}))`
     findAll('a').each { |link| link[:target] = '_blank' }
   end
 end
