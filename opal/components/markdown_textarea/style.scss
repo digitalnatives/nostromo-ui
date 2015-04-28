@@ -16,7 +16,7 @@
 
     position: absolute;
     transition: 320ms;
-    bottom: 10px;
+    bottom: -30px;
     right: 10px;
     opacity: 0;
     z-index: 3;
@@ -57,9 +57,14 @@
 
   &.editing {
     box-shadow: 0 0 0 1px rgba($blue, 0.05), 0 5px 10px rgba($blue, 0.2);
+    margin-bottom: 35px;
 
     a {
       opacity: 1;
+    }
+
+    span {
+      opacity: 0.5;
     }
 
     content {
@@ -71,6 +76,24 @@
       transition: 320ms 320ms;
       pointer-events: auto;
       opacity: 1;
+    }
+  }
+
+  span {
+    pointer-events: none;
+    transition: 160ms;
+    position: absolute;
+    line-height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    bottom: -30px;
+    height: 30px;
+    opacity: 0;
+    right: 0;
+    left: 0;
+
+    > * {
+      margin: 0 5px;
     }
   }
 

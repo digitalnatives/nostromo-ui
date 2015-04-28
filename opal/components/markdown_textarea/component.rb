@@ -6,6 +6,7 @@ class MarkdownTextarea < Fron::Component
 
   component :content,  :content
   component :textarea, 'textarea[spellcheck=false]'
+  component :hints,    'span'
   component :icon,     'a[href=https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet][target=_blank] ?'
 
   def_delegators :@textarea, :value, :blur
@@ -18,6 +19,7 @@ class MarkdownTextarea < Fron::Component
   # Initializes the textearea
   def initialize
     super
+    @hints.html = '<b>**bold**</b> <i>_italics_</i> <code>`code`</code> <code>```prefomatted```</code> > quoute'
     @textarea.on :blur do finish end
     @textarea.on :focus do start end
     finish
