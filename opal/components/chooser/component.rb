@@ -51,6 +51,8 @@ class Chooser < Fron::Component
   end
 
   def keypress(event)
+    event.stopPropagation
+    event.stopImmediatePropagation
     @search ||= ''
     clear_timeout @timeout_id
     @timeout_id = timeout 300 do
