@@ -14,6 +14,7 @@ class ContentEditable < Fron::Component
   def change
     `#{ContentEditable.editablefix}.el.setSelectionRange(0, 0);`
     ContentEditable.editablefix.blur
+    `ClearSelection()`
     trigger 'change'
   end
 
