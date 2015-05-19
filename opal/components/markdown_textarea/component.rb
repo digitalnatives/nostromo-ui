@@ -19,7 +19,7 @@ class MarkdownTextarea < Fron::Component
   # Initializes the textearea
   def initialize
     super
-    @hints.html = '<b>**bold**</b> <i>_italics_</i> <code>`code`</code> <code>```prefomatted```</code> > quoute'
+    @hints.html = '<b>**bold**</b> <i>_italics_</i> <code>`code`</code> <code>```preformatted```</code> > quote'
     @textarea.on :blur do finish end
     @textarea.on :focus do start end
     finish
