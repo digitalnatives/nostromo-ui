@@ -1,0 +1,15 @@
+$padding: 1em !default;
+$spacing: 0.75em !default;
+$border-radius: 0.25em !default;
+$border-size: 0.1em !default;
+
+$input-color: #163850 !default;
+$red: #B42A05 !default;
+$green: #54B886 !default;
+$highlight: #378BC8 !default;
+
+$background-color: mix($input-color, #FFF, 5.4%);
+$font-color: mix($input-color, #666, 40%);
+$border-color: darken($background-color, 4%);
+$placeholder-color: mix($input-color, #BBB, 20%);
+$background-light-color: lighten($background-color, 2%);

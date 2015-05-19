@@ -3,24 +3,19 @@ auto-complete {
   display: block;
 
   input {
-    @include focusable;
+    @include input;
 
-    padding: 7px 10px;
+    padding: $padding / 2 $padding / 1.6;
     width: 100%;
-    border: 0;
-
-    &::placeholder {
-      font-weight: 600;
-      color: #CCC;
-    }
   }
 
   auto-complete-dropdown {
-    box-shadow: 0 0 0 1px rgba($blue, 0.05), 0 10px 10px -5px rgba($blue, 0.2);
-    border-radius: 3px;
+    box-shadow: 0 0 0 0.07em rgba($input-color, 0.05), 0 0.71em 0.71em -0.35em rgba($input-color, 0.2);
+    border-radius: $border-radius;
+    margin-top: $spacing / 2;
+    color: $font-color;
     position: absolute;
     background: #FFF;
-    margin-top: 5px;
     z-index: 1;
     top: 100%;
     right: 0;
@@ -31,36 +26,30 @@ auto-complete {
     }
 
     item {
-      display: block;
-      padding: 5px;
-      line-height: 30px;
+      padding: $padding / 2;
       font-weight: 600;
       cursor: pointer;
+      display: block;
 
       > * {
         pointer-events: none;
       }
 
       &.selected, &:hover {
-        background: $blue;
+        background: $input-color;
         color: #FFF;
       }
 
       &:first-child {
-        border-radius: 3px 3px 0 0;
+        border-radius: $border-radius $border-radius 0 0;
       }
 
       &:last-child {
-        border-radius: 0 0 3px 3px;
-      }
-
-      member {
-        margin: 0;
-        margin-right: 10px;
+        border-radius: 0 0 $border-radius $border-radius;
       }
 
       + item {
-        border-top: 1px solid $light-blue;
+        border-top: $border-size solid $border-color;
       }
     }
   }

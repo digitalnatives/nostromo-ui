@@ -1,0 +1,204 @@
+@mixin flex-center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 0;
+}
+
+@mixin flex-row($with-spacing: true, $mobile: false) {
+  display: flex;
+
+  @if $with-spacing {
+    > * + * {
+      margin-left: $spacing;
+    }
+  }
+
+  @if $mobile {
+    @media (max-width: 1000px) {
+      display: block;
+
+      @if $with-spacing {
+        > * + * {
+          margin-left: 0;
+          margin-top: $spacing;
+        }
+      }
+    }
+  }
+}
+
+@mixin flex-column($with-spacing: true) {
+  flex-direction: column;
+  display: flex;
+
+  @if $with-spacing {
+    > * + * {
+      margin-top: $spacing;
+    }
+  }
+}
+
+@mixin list {
+  overflow: auto;
+
+  > * {
+    &:nth-child(odd) {
+      background-color: $background-light-color;
+    }
+  }
+}
+
+@mixin box {
+  padding: $padding;
+  border-radius: $border-radius;
+  background-color: $background-color;
+}
+
+@mixin module {
+  @include flex-column;
+
+  color: $font-color;
+  padding: $spacing;
+  max-height: 100vh;
+  font-size: 14px;
+  flex: 1;
+
+  @media (max-width: 1000px) {
+    overflow-y: auto;
+    display: block;
+  }
+}
+
+@mixin module-header($editable: false, $mobile: false) {
+  @include flex-row($mobile: $mobile);
+  @include box;
+
+  min-height: 4.3em;
+
+  @if $editable {
+    padding: $padding / 2;
+
+    > [contenteditable] {
+      @include editable-entity-header;
+    }
+  }
+}
+
+@mixin module-title($border: true) {
+  @include flex-center;
+
+  font-weight: 600;
+  font-size: 1.6em;
+
+  @if $border {
+    border-right: ($border-size * 2) solid $border-color;
+    padding-right: $padding;
+  }
+}
+
+@mixin box-title {
+  border-bottom: ($border-size * 2) solid $border-color;
+  padding-bottom: $padding / 3;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+@mixin input {
+  @include focusable;
+
+  padding: $padding / 1.5;
+  background: #FFF;
+  border: 0;
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+}
+
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin actionable($transition: false) {
+  cursor: pointer;
+
+  > * {
+    pointer-events: none;
+  }
+
+  &:hover {
+    color: $highlight;
+  }
+
+  @if $transition {
+    transition: padding-left 320ms;
+
+    &:hover {
+      padding-left: 1em;
+    }
+  }
+}
+
+@mixin editable-entity-header {
+  @include input-pencil;
+  @include focusable;
+  flex: 1;
+
+  font-size: 1.6em;
+  font-weight: 600;
+  padding: $padding / 4 $padding / 2;
+
+  &:not(:focus) {
+    cursor: pointer;
+  }
+
+  &:focus {
+    background: #FFF;
+  }
+}
+
+@mixin input-pencil {
+  &:not(:focus):after {
+    content: '\f040';
+    font-weight: normal;
+    font-size: 0.7em;
+    opacity: 0.3;
+    margin-left: $spacing / 1.5;
+    font-family: FontAwesome;
+  }
+}
+
+@mixin button($color: $input-color) {
+  border-radius: 0.15em;
+  background: $color;
+  padding: 0.4em 2em;
+  padding-bottom: 0.5em;
+  border: 0;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1em;
+  color: #FFF;
+
+  &:hover { background: lighten($color, 10%); }
+  &:active { background: darken($color, 10%); }
+
+  > *, i.fa {
+    pointer-events: none;
+  }
+}
+
+@mixin focusable {
+  box-shadow: 0 0 0 1px rgba($input-color, 0), 0 0 0 rgba($input-color, 0.2);
+  border-radius: 2px;
+  transition: 320ms;
+
+  &:focus {
+    box-shadow: 0 0 0 1px rgba($input-color, 0.05), 0 3px 7px rgba($input-color, 0.2);
+    outline: none;
+  }
+}

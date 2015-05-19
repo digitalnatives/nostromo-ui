@@ -1,29 +1,27 @@
 multi-select {
-  color: mix($blue, #999, 40%);
   display: inline-block;
   position: relative;
-  width: 200px;
+  color: $font-color;
+  width: 14em;
 
   &:after {
-    border-color: #CCC transparent transparent;
-    border-width: 6px 6px 0;
+    border-color: $font-color transparent transparent;
+    border-width: 0.42em 0.42em 0;
     border-style: solid;
     position: absolute;
+    right: 0.85em;
+    top: 0.85em;
     content: '';
-    right: 12px;
-    top: 12px;
     height: 0;
     width: 0;
   }
 
   > input {
-    padding-right: 30px !important;
-    font-weight: 600;
-    width: inherit;
+    @include ellipsis;
+    @include input;
 
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    padding-right: 2.2em !important;
+    width: 100%;
 
     &:focus {
       text-overflow: clip;
@@ -38,39 +36,38 @@ multi-select {
   }
 
   multi-select-dropdown {
-    box-shadow: 0 0 0 1px $border-color, 0 10px 10px -5px rgba($blue, 0.2);
-    background: $light-blue;
-    border-radius: 3px;
+    box-shadow: 0 0 0 0.07em rgba($input-color, 0.05), 0 0.71em 0.71em -0.35em rgba($input-color, 0.2);
+    border-radius: $border-radius;
     position: absolute;
-    max-height: 300px;
-    margin-top: 4px;
+    margin-top: 0.3em;
+    max-height: 22em;
+    background: #FFF;
     overflow: auto;
-    width: inherit;
     display: none;
     z-index: 1000;
     top: 100%;
+    right: 0;
     left: 0;
   }
 
   multi-select-item {
+    padding: $padding / 5;
     cursor: pointer;
     display: flex;
 
     &:hover {
-      background: darken($light-blue, 5%);
+      background: $background-color;
     }
 
     + multi-select-item {
-      border-top: 1px solid $border-color;
+      border-top: $border-size solid $background-color;
     }
 
     span {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+      @include ellipsis;
 
-      padding-left: 5px;
-      line-height: 32px;
+      padding-left: $spacing / 4;
+      line-height: 2.28em;
       font-weight: 600;
       flex: 1;
     }
@@ -78,10 +75,10 @@ multi-select {
 
   multi-select-check-box {
     @extend %check-box;
-    margin: 5px;
+    margin: $spacing / 2;
 
     input:not(:checked) + label {
-      background: #FFF;
+      background: mix($input-color, #EEE, 5%);
     }
   }
 }

@@ -1,8 +1,8 @@
 %check-box {
   display: inline-block;
   overflow: hidden;
-  height: 20px;
-  width: 20px;
+  height: 1.42em;
+  width: 1.42em;
 
   input {
     display: none;
@@ -18,16 +18,15 @@
   }
 
   label {
-    border-radius: 3px;
+    @include flex-center;
+
+    border-radius: $border-radius / 1.5;
     transition: 320ms;
     background: #EEE;
     cursor: pointer;
     height: inherit;
     width: inherit;
     margin: 0;
-
-    line-height: 20px;
-    text-align: center;
 
     i.fa {
       transform: scale(0.4) rotate(45deg);

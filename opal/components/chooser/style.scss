@@ -2,11 +2,10 @@ chooser {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  margin: 2px 0;
-  height: 26px;
-  width: 120px;
+  height: 1.85em;
+  width: 8.5em;
 
-  line-height: 26px;
+  line-height: 1.85em;
   font-weight: 600;
 
   &:focus {
@@ -14,82 +13,78 @@ chooser {
   }
 
   chooser-label {
-    border-radius: 3px;
+    @include ellipsis;
+
+    border-radius: $border-radius;
+    background: $input-color;
     position: relative;
-    background: $gray;
     height: inherit;
     display: block;
     color: #FFF;
 
-    padding: 0 7px;
-    padding-right: 25px;
-
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    padding: 0 $padding / 2;
+    padding-right: 2em;
 
     &:after {
       border-color: currentColor transparent transparent;
-      border-width: 5px 5px 0;
+      border-width: 0.42em 0.42em 0;
       border-style: solid;
       position: absolute;
+      right: 0.85em;
+      top: 0.85em;
       content: '';
-      right: 10px;
-      top: 10px;
       height: 0;
       width: 0;
     }
   }
 
   chooser-dropdown {
-    box-shadow: 0 0 0 1px rgba($blue, 0.1), 0 10px 10px -5px rgba($blue, 0.2);
-    border-radius: 3px;
+    box-shadow: 0 0 0 0.07em rgba($input-color, 0.05), 0 0.71em 0.71em -0.35em rgba($input-color, 0.2);
+    border-radius: $border-radius;
     background: #FFF;
     display: none;
 
     position: absolute;
-    margin-top: 2px;
+    margin-top: 0.5em;
     z-index: 1000;
     top: 100%;
     right: 0;
     left: 0;
 
-    max-height: 400px;
+    max-height: 25em;
     overflow: auto;
 
     chooser-option {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-weight: normal;
-      overflow: hidden;
+      @include ellipsis;
+
+      padding: $padding / 4 $padding / 2;
       display: block;
-      padding: 0 7px;
 
       &.selected {
-        background: $blue;
+        background: $input-color;
         color: #FFF;
       }
 
       &:first-child {
-        border-radius: 3px 3px 0 0;
+        border-radius: $border-radius $border-radius 0 0;
       }
 
       &:last-child {
-        border-radius: 0  0 3px 3px;
+        border-radius: 0  0 $border-radius $border-radius;
       }
 
-      &:hover {
-        background: #EEE;
+      &:hover:not(.selected) {
+        background: $background-color;
       }
 
       + chooser-option {
-        border-top: 1px solid #EEE;
+        border-top: $border-size solid $background-color;
       }
     }
   }
 
   &.top chooser-dropdown {
-    transform: translateY(-2px);
+    transform: translateY(-0.7em);
     bottom: 100%;
     top: auto;
   }

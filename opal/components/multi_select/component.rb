@@ -10,6 +10,7 @@ class MultiSelect < Fron::Component
       @placeholder = text
     end
   end
+
   extend Forwardable
 
   tag 'multi-select'
@@ -55,6 +56,7 @@ class MultiSelect < Fron::Component
   end
 
   def render_label
+    return if DOM::Document.activeElement == @input
     @input[:placeholder] = placeholder
     @input.value = selected.map(&:label).join(', ')
   end

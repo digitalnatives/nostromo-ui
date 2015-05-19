@@ -1,11 +1,11 @@
 member {
   display: inline-block;
   position: relative;
-  width: 30px;
-  margin: 2px;
+  margin: 0.14em;
+  width: 2.14em;
 
   img {
-    border-radius: 3px;
+    border-radius: $border-radius / 1.5;
     width: 100%;
     pointer-events: none;
   }
