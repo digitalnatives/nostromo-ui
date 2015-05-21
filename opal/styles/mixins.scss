@@ -133,11 +133,13 @@
     color: $highlight;
   }
 
-  @if $transition {
-    transition: padding-left 320ms;
+  @media (min-height: 1000px) {
+    @if $transition {
+      transition: padding-left 320ms;
 
-    &:hover {
-      padding-left: 1em;
+      &:hover {
+        padding-left: 1em;
+      }
     }
   }
 }
