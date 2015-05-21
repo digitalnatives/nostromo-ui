@@ -133,7 +133,7 @@
     color: $highlight;
   }
 
-  @media (min-height: 1000px) {
+  @media (min-width: 1000px) {
     @if $transition {
       transition: padding-left 320ms;
 
