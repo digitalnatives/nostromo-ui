@@ -2,6 +2,8 @@
 class MarkdownTextarea < Fron::Component
   extend Forwardable
 
+  attr_reader :readonly
+
   tag 'markdown-textarea'
 
   component :content,  :content
@@ -15,6 +17,10 @@ class MarkdownTextarea < Fron::Component
   on :click,      :edit
   on :mousedown,  :mousedown
   on :change,     :render
+
+  def readonly=(value)
+    @readonly = !!value
+  end
 
   # Initializes the textearea
   def initialize
@@ -64,6 +70,7 @@ class MarkdownTextarea < Fron::Component
   #
   # @param event [Event] The event
   def edit(event)
+    return if @readonly
     return if event.target == @textarea
     @textarea.focus
   end
@@ -75,7 +82,7 @@ class MarkdownTextarea < Fron::Component
 
   # Renders the value as markdown
   def render
-    @content.html = `marked(Encoder.htmlEncode(#{value.to_s}))`
+    @content.html = `marked(Encoder.htmlEncode(#{value.to_s}), { breaks: true })`
     findAll('a').each { |link| link[:target] = '_blank' }
   end
 end
